@@ -1,0 +1,26 @@
+from linked_list_nodes import DoublyListNode as ListNode
+
+# Let node be the node at position i
+def add_node(node, node_to_add):
+    prev_node = node.prev
+    node_to_add.next = node
+    node_to_add.prev = prev_node
+    prev_node.next = node_to_add
+    node.prev = node_to_add
+
+# Let node be the node at position i
+def delete_node(node):
+    prev_node = node.prev
+    next_node = node.next
+    prev_node.next = next_node
+    next_node.prev = prev_node
+
+def get_sum(head):
+    ans = 0
+    dummy = head
+    while dummy:
+        ans += dummy.val
+        dummy = dummy.next
+    
+    # same as before, but we still have a pointer at the head
+    return ans
