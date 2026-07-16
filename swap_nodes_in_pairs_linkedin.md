@@ -29,6 +29,32 @@ A → B → C
 B → A → C
 ```
 
+```python
+def swap_pairs(head: Optional[ListNode]) -> Optional[ListNode]:
+    if not head or not head.next:
+        return head
+
+    new_head = head.next
+    previous = None
+    current = head
+
+    while current and current.next:
+        first = current
+        second = current.next
+        remainder = second.next
+
+        second.next = first
+        first.next = remainder
+
+        if previous:
+            previous.next = second
+
+        previous = first
+        current = remainder
+
+    return new_head
+```
+
 There are a few details that make this problem interesting:
 
 - The returned head is the second node of the first pair.
