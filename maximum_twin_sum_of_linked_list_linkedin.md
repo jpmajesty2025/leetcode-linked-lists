@@ -1,9 +1,8 @@
-# Maximum Twin Sum: Simplifying a Linked-List Strategy
+# Maximum Twin Sum: Tying Useful Techniques Together
 
-The maximum twin sum problem is a great example of how a correct idea can become unnecessarily complicated when we try to force the data structure into a different shape.
+Problem statement: In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1. The twin sum is defined as the sum of a node and its twin. Given the head of a linked list with even length, return the maximum twin sum of the linked list.
 
-For an even-length linked list, each node is paired with the node the same distance from the opposite end. For example:
-
+Example:
 ```text
 1 → 4 → 2 → 3
 
@@ -21,8 +20,6 @@ A more efficient linked-list solution is:
 4. Track the largest twin sum.
 5. Reverse the second half again to restore the original list.
 
-The important insight is that the two halves do **not** need to be glued back together during the comparison. Once the second half is reversed, it is already independently aligned with the first half:
-
 ```text
 First half:             1 → 4
 Reversed second half:   3 → 2
@@ -30,7 +27,36 @@ Reversed second half:   3 → 2
 Twin comparisons:       1 + 3, 4 + 2
 ```
 
-This is simpler and safer than reconnecting the halves and then using pointer offsets to find the pairs. It also makes the algorithm’s structure much easier to reason about.
+```python
+def pair_sum(head: Optional[ListNode]) -> int:
+    if head is None or head.next is None:
+        raise ValueError("pair_sum requires an even-length list with at least two nodes")
+
+    slow = head
+    fast = head
+    first_half_tail = None
+
+    while fast and fast.next:
+        first_half_tail = slow
+        slow = slow.next
+        fast = fast.next.next
+
+    first_half_tail.next = None
+    reversed_second_half = reverse(slow)
+
+    left = head
+    right = reversed_second_half
+    maximum = None
+    while right:
+        twin_sum = left.val + right.val
+        maximum = twin_sum if maximum is None else max(maximum, twin_sum)
+        left = left.next
+        right = right.next
+
+    restored_second_half = reverse(reversed_second_half)
+    first_half_tail.next = restored_second_half
+    return maximum
+```
 
 Because the second half is reversed again before returning, the caller receives the original list structure unharmed. We get:
 
