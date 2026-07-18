@@ -21,13 +21,10 @@ def reverse_between(
     sentinel = ListNode(0)
     sentinel.next = head
     before_range = sentinel
-    print(f'\n before_range: {before_range.val}')
     for _ in range(left - 1):
         before_range = before_range.next
-        print(f'\n before_range: {before_range.val}')
 
     range_tail = before_range.next
-    print(f'\n range_tail: {range_tail.val}')
     for _ in range(right - left):
         node = range_tail.next
         range_tail.next = node.next
