@@ -11,31 +11,29 @@ Range:  left = 2, right = 4
 Output: 1 → 4 → 3 → 2 → 5
 ```
 
-One possible approach, if you have a `reverse(head)` function, is to locate the sublist within the main list, detach it, reverse it, then reatach it. This works but is overly complicated.
+One possible approach, if you have a `reverse(head)` function, is to locate the sublist within the main list, detach it, reverse it, then reattach it. This works but is overly complicated.
 
-Instead, we can reverse the selected range in place while keeping the rest of the list connected.
+Instead, we can reverse the selected range in place, shifting one node at a time, while keeping the rest of the list connected.
 
 A clean solution uses a temporary sentinel node and the **head-insertion** technique:
 
 1. Place a sentinel before the original head. This makes reversing a range beginning at position 1 follow the same logic as any other range.
 2. Move a pointer to the node immediately before the reversal range.
 3. Keep a pointer to the first node in the range because it becomes the range’s tail after reversal.
-4. Repeatedly remove the node after the range tail.
+4. Repeatedly detach the node after the range tail.
 5. Insert that node immediately after the node before the range.
 6. Continue until all nodes in the selected range have moved into reverse order.
 7. Return the sentinel’s next node as the new head.
 
-The original nodes are rearranged; their values are not changed. The sentinel is only a temporary helper and is not returned as part of the list.
-
-In the prior example, for the range `2 → 3 → 4`, the head-insertion steps look like this:
+In the prior example, for the range `2 → 3 → 4`, `1` is the node right before the reversal range and `2` will become the tail of the reversed range. So the head-insertion steps look like this:
 
 ```text
 1 → 2 → 3 → 4 → 5
 
-Move 3 before 2:
+Move 3 aftter 1:
 1 → 3 → 2 → 4 → 5
 
-Move 4 before 3:
+Move 4 after 1:
 1 → 4 → 3 → 2 → 5
 ```
 
@@ -70,4 +68,4 @@ The algorithm uses:
 
 This problem is a good reminder that a carefully chosen invariant can simplify edge cases. By keeping the range’s tail fixed and inserting each following node at the front, the reversal becomes a sequence of small, predictable pointer updates.
 
-#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Programming #SoftwareEngineering
+#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Pointers #Programming #SoftwareEngineering
