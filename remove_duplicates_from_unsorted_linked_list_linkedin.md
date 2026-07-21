@@ -22,7 +22,7 @@ For each node:
 
 - If its value is new, add it to `seen` and advance both pointers.
 - If its value has already been seen, bypass the node with `previous.next = current.next`.
-- Do not advance `previous` after deleting a node.
+- Do not advance `previous` after deleting a node. Only advance `current`.
 
 The set identifies duplicates, while the two pointers remove duplicate nodes in place.
 
@@ -33,8 +33,8 @@ Complexity:
 - **O(1) pointer space**
 - Original order is preserved
 
-Without hashing, constant extra space is possible, but repeated searches would make the algorithm O(n²).
+Without hashing, constant extra space is possible, but repeated searches would make the algorithm O(n²) time complexity. Why? When you encounter a particular number in a node, you need to use another pointer to scan the rest of the list for other instances of that value and remove any found. 
 
 This is a useful example of trading memory for speed: when sorted order is unavailable, a set restores efficient duplicate detection.
 
-#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Hashing #Programming #SoftwareEngineering #CodingJourney
+#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Hashing #Pointers #Programming #SoftwareEngineering
