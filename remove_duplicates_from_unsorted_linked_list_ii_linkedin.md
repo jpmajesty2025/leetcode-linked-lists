@@ -48,4 +48,4 @@ The two-pass frequency-map approach is easier to reason about, easier to test, a
 
 This problem highlights an important distinction: recognizing that a value has appeared before is not the same as knowing whether it will appear again.
 
-#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Hashing #Programming #SoftwareEngineering #CodingJourney
+#LearningInPublic #Algorithms #DataStructures #Python #LinkedLists #Hashing #Pointers #Programming #SoftwareEngineering

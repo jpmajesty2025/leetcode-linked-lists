@@ -65,3 +65,18 @@ def reverse_even_length_groups(head: Optional[ListNode]) -> Optional[ListNode]:
         intended_group_length += 1
 
     return sentinel.next
+
+n1 = ListNode(5)
+n2 = ListNode(2)
+n3 = ListNode(6)
+n4 = ListNode(3)
+
+n1.next = n2
+n2.next = n3
+n3.next = n4
+
+head= n1
+result = reverse_even_length_groups(head)
+while result:
+    print(result.val, end=" -> ")
+    result = result.next
